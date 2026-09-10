@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Error</title>
+</head>
+<body>
+<h1>Error</h1>
+<h2><span th:text="${error}"></span> (<span th:text="${status}"></span>)</h2>
+<p th:text="${message}"></p>
+<pre th:if="${isDev and trace != null}" th:text="${trace}"></pre>
+</body>
+</html>
