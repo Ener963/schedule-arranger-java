@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title th:text="'予定: ' + ${schedule.scheduleName}">予定</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="card my-3">
+    <h4 class="card-header" th:text="${schedule.scheduleName}"></h4>
+    <div class="card-body">
+      <p style="white-space: pre;" th:text="${schedule.memo}"></p>
+    </div>
+    <div class="card-footer">作成者: <span th:text="${schedule.user.username}"></span></div>
+  </div>
+  <a th:if="${isMine}"
+     th:href="@{/schedules/{id}/edit(id=${scheduleId})}"
+     class="btn btn-primary">
+    この予定を編集する <i class="bi bi-pencil"></i>
+  </a>
+  <h3 class="my-3">出欠表</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tr>
+        <th>予定</th>
+        <th th:each="u : ${users}" th:text="${u.username}"></th>
+      </tr>
+      <tr th:each="row : ${rows}">
+        <th th:text="${row.candidateName}"></th>
+        <td th:each="cell : ${row.cells}">
+          <button th:if="${cell.editable}"
+                  type="button"
+                  th:text="${cell.label}"
+                  th:class="${cell.cssClass}"
+                  th:attr="data-schedule-id=${scheduleId},data-user-id=${cell.userId},data-candidate-id=${cell.candidateId},data-availability=${cell.availability}"></button>
+          <h3 th:unless="${cell.editable}" th:text="${cell.label}"></h3>
+        </td>
+      </tr>
+      <tr>
+        <th>コメント</th>
+        <td th:each="c : ${commentCells}">
+          <p>
+            <small th:id="${c.editable} ? 'self-comment' : null" th:text="${c.comment}"></small>
+          </p>
+          <button th:if="${c.editable}"
+                  type="button"
+                  id="self-comment-button"
+                  class="btn btn-info"
+                  th:attr="data-schedule-id=${scheduleId},data-user-id=${c.userId}">編集</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

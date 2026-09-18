@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>予定の作成</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <form method="post" th:action="@{/schedules}" class="my-3">
+    <div class="mb-3">
+      <label class="form-label">予定名</label>
+      <input type="text" name="scheduleName" class="form-control"/>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">メモ</label>
+      <textarea name="memo" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">
+        候補日程 (改行して複数入力してください)
+      </label>
+      <textarea name="candidates" class="form-control"></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">予定をつくる</button>
+  </form>
+</div>
+</body>
+</html>

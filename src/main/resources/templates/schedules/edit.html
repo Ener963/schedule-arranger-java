@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title th:text="'予定の編集: ' + ${schedule.scheduleName}">予定の編集</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <form class="my-3" method="post" th:action="@{/schedules/{id}/update(id=${schedule.scheduleId})}">
+    <div class="mb-3">
+      <label class="form-label">予定名</label>
+      <input type="text" name="scheduleName" class="form-control" th:value="${schedule.scheduleName}"/>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">メモ</label>
+      <textarea name="memo" class="form-control" th:text="${schedule.memo}"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">既存の候補日程</label>
+      <ul class="list-group mb-2">
+        <li class="list-group-item" th:each="candidate : ${candidates}" th:text="${candidate.candidateName}"></li>
+      </ul>
+      <p>候補日程の追加 (改行して複数入力してください)</p>
+      <textarea name="candidates" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">
+      以上の内容で予定を編集する <i class="bi bi-pencil"></i>
+    </button>
+  </form>
+  <h3 class="my-3">危険な変更</h3>
+  <form method="post" th:action="@{/schedules/{id}/delete(id=${schedule.scheduleId})}" id="delete-schedule-form">
+    <button type="submit" class="btn btn-danger">
+      この予定を削除する <i class="bi bi-trash"></i>
+    </button>
+  </form>
+</div>
+</body>
+</html>

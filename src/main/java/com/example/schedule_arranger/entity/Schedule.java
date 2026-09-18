@@ -34,13 +34,13 @@ public class Schedule {
     @Column(nullable = false, length = 255)
     private String scheduleName;
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column(nullable = false)
     private String memo;
 
     @Column(nullable = false)
     private Integer createdBy;
 
-    @Column(nullable = false, columnDefinition = "timestamptz(6)")
+    @Column(nullable = false)
     private OffsetDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
