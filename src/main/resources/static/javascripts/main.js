@@ -1,10 +1,5 @@
 'use strict';
 
-// entry.js 相当（jQuery + bootstrap バンドルの代わりに素のJS + BootstrapのCDN版で実装）。
-// Bootstrap本体（ナビゲーションバーのトグルボタン等）は layout.html で CDN から読み込み済み。
-// Spring Security の CSRF 保護に対応するため、layout.html の meta タグから
-// トークンを読み取ってリクエストヘッダに付与する。
-
 (function () {
     function csrfHeaders() {
         var tokenMeta = document.querySelector('meta[name="_csrf"]');

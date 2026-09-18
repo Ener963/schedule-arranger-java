@@ -33,12 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * JS 版 src/routes/schedules.js 相当。
- *
- * 認証必須であること（JS 版の app.use(ensureAuthenticated())）は、
- * SecurityConfig 側で "/schedules/**" を authenticated() にすることで担保している。
- */
 @Controller
 @RequestMapping("/schedules")
 public class ScheduleController {
@@ -138,7 +132,6 @@ public class ScheduleController {
         // 閲覧ユーザと、出欠を登録したユーザを合わせた全ユーザの配列を作る
         List<UserSummary> users = new ArrayList<>(userMap.values());
 
-        // テンプレートで扱いやすいように、候補日程ごとの行（各ユーザのセル）を組み立てる
         List<CandidateRow> rows = new ArrayList<>();
         for (Candidate candidate : candidates) {
             Map<Integer, Integer> inner = availabilityMapMap.get(candidate.getCandidateId());

@@ -12,13 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * JS 版 src/routes/comments.js 相当。
- *
- * 認証必須であること（JS 版の ensureAuthenticated()）は SecurityConfig の
- * "/schedules/**".authenticated() でまとめて担保している。
- * availabilities.js 同様、:userId がログイン中ユーザーと一致するかの検証はしていない（JS 版と同じ挙動）。
- */
 @RestController
 @RequestMapping("/schedules")
 public class CommentController {
@@ -35,7 +28,6 @@ public class CommentController {
     public Map<String, Object> update(@PathVariable UUID scheduleId,
                                       @PathVariable Integer userId,
                                       @RequestBody CommentRequest body) {
-        // JS 版の body.comment.slice(0, 255) 相当（comment が無い場合は JS 版同様に例外になる）
         String comment = truncate(body.comment(), COMMENT_MAX_LENGTH);
 
         Comment entity = commentRepository.findById(new CommentId(scheduleId, userId))
@@ -52,9 +44,6 @@ public class CommentController {
         return value.length() > maxLength ? value.substring(0, maxLength) : value;
     }
 
-    /**
-     * JS 版の body.comment に相当するリクエストボディ。
-     */
     public record CommentRequest(String comment) {
     }
 }

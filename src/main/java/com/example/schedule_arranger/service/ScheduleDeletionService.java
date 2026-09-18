@@ -9,11 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
-/**
- * schedules.js の deleteScheduleAggregate() に相当。
- * availability → candidate → comment → schedule の順に削除する。
- * 4つのテーブルへの削除をまとめて1トランザクションにするためサービスクラスに切り出している。
- */
 @Service
 public class ScheduleDeletionService {
 

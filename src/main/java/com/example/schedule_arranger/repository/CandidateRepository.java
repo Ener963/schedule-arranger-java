@@ -13,7 +13,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
 
     List<Candidate> findByScheduleIdOrderByCandidateIdAsc(UUID scheduleId);
 
-    // schedules.js の prisma.candidate.deleteMany({ where: { scheduleId } }) に相当
     @Modifying
     @Query("DELETE FROM Candidate c WHERE c.scheduleId = :scheduleId")
     void deleteByScheduleId(@Param("scheduleId") UUID scheduleId);

@@ -5,11 +5,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-/**
- * layout.js のナビゲーションバー（ログイン中なら「${user.login} をログアウト」、
- * そうでなければ「ログイン」を表示）は全ページ共通のため、
- * 各コントローラーで毎回セットする代わりにここで一括して Model に追加する。
- */
 @ControllerAdvice
 public class GlobalModelAttributes {
 

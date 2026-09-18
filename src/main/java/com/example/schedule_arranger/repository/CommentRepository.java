@@ -12,10 +12,8 @@ import java.util.UUID;
 
 public interface CommentRepository extends JpaRepository<Comment, CommentId> {
 
-    // schedules.js の prisma.comment.findMany({ where: { scheduleId } }) に相当
     List<Comment> findByScheduleId(UUID scheduleId);
 
-    // schedules.js の prisma.comment.deleteMany({ where: { scheduleId } }) に相当
     @Modifying
     @Query("DELETE FROM Comment c WHERE c.scheduleId = :scheduleId")
     void deleteByScheduleId(@Param("scheduleId") UUID scheduleId);
