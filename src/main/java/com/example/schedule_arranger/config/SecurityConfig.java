@@ -3,8 +3,10 @@ package com.example.schedule_arranger.config;
 import com.example.schedule_arranger.security.CustomOAuth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 @Configuration
 public class SecurityConfig {
@@ -30,10 +32,7 @@ public class SecurityConfig {
                         )
                 )
                 .logout(logout -> logout
-                        .logoutRequestMatcher(request ->
-                                "GET".equals(request.getMethod())
-                                        && "/logout".equals(request.getRequestURI())
-                        )
+                        .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/logout"))
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
